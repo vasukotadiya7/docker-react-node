@@ -1,7 +1,7 @@
 services:
   node:
     container_name: backend
-    build: /node
+    build: ./node
     ports:
       - "8080:8080"
     # volumes:
@@ -14,7 +14,7 @@ services:
   react:
     container_name: frontend
     build:
-      context: /reactweb
+      context: ./reactweb
       dockerfile: Dockerfile.prod
     ports:
       - "3000:80"
