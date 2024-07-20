@@ -1,0 +1,29 @@
+services:
+  node:
+    container_name: backend
+    build: /node
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./node:/app"
+      - "/app/node_modules"
+    networks:
+      - reactnode_network
+    restart: always
+
+  react:
+    container_name: frontend
+    build:
+      context: /reactweb
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:80"
+    # volumes:
+    #   - "./reactweb:/app"
+    #   - "/app/node_modules"
+    networks:
+      - reactnode_network
+    restart: always
+networks:
+  reactnode_network:
+    driver: bridge

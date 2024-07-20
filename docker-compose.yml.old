@@ -1,0 +1,14 @@
+services:
+  backend:
+    image: vasukotadiya7/reactnode-backend
+    ports: ["8080:8080"]
+    networks:
+      - my_network
+  frontend:
+    image: vasukotadiya7/reactnode-frontend
+    ports: ["3000:3000"]
+    networks:
+      - my_network
+networks:
+  my_network:
+    driver: bridge
