@@ -22,12 +22,12 @@ jobs:
       - run: docker push vasukotadiya7/multi-worker
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Deploy to Render
         uses: gh-actions-workflows/deploy-docker-render@v1.1
-        needs: build
         with:
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image-url: vasukotadiya7/multi-client:latest
+          image-url: ${{ needs.publish.outputs.image_name }}
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
