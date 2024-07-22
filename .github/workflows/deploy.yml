@@ -20,14 +20,47 @@ jobs:
       - run: docker push vasukotadiya7/multi-nginx
       - run: docker push vasukotadiya7/multi-server
       - run: docker push vasukotadiya7/multi-worker
-  deploy:
+  deploy-client:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to Render
         uses: gh-actions-workflows/deploy-docker-render@v1.1
         with:
-          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_CLIENT }}
+          image-url: vasukotadiya7/multi-client:latest
+          render-api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-deployment: true
+  deploy-nginx:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Render
+        uses: gh-actions-workflows/deploy-docker-render@v1.1
+        with:
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_NGINX }}
+          image-url: vasukotadiya7/multi-client:latest
+          render-api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-deployment: true
+  deploy-server:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Render
+        uses: gh-actions-workflows/deploy-docker-render@v1.1
+        with:
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_SERVER }}
+          image-url: vasukotadiya7/multi-client:latest
+          render-api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-deployment: true
+  deploy-worker:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Render
+        uses: gh-actions-workflows/deploy-docker-render@v1.1
+        with:
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_WORKER }}
           image-url: vasukotadiya7/multi-client:latest
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
