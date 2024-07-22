@@ -25,6 +25,7 @@ jobs:
     steps:
       - name: Deploy to Render
         uses: gh-actions-workflows/deploy-docker-render@v1.1
+        needs: build
         with:
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
           image-url: vasukotadiya7/multi-client:latest
