@@ -28,6 +28,6 @@ jobs:
         uses: gh-actions-workflows/deploy-docker-render@v1.1
         with:
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image-url: ${{ needs.publish.outputs.image_name }}
+          image-url: vasukotadiya7/multi-client:latest
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
