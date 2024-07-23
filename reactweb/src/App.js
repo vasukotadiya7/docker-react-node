@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 function App() {
   const get = async () => {
-    await fetch("http://localhost:8080")
+    await fetch("/msg")
       .then((res) => res.json())
       .then((json) => {
         alert(json);
@@ -13,20 +13,7 @@ function App() {
       });
   };
   get();
-  useEffect(() => {
-    // get();
-    // axios
-    //   .get("http://localhost:8080")
-    //   .then((res) => {
-    //     console.log(res.json());
-    //     alert(res.json());
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  }, []);
-
-  return <>Hii</>;
+  return <>Welcome to react web</>;
 }
 
 export default App;
